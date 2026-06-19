@@ -10,5 +10,5 @@ export default function IndexRoute() {
     return <LoadingOverlay message="Checking session..." />;
   }
 
-  return <Redirect href={session ? '/home' : '/login'} />;
+  return <Redirect href={session ? '/(tabs)' : '/login'} />;
 }

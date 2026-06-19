@@ -65,7 +65,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
         await ensureProfile(data.user);
 
-        router.replace('/home');
+        router.replace('/(tabs)');
         return { error: null };
       },
       signUp: async (email, password) => {
@@ -86,7 +86,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         await ensureProfile(data.user);
 
         if (data.session) {
-          router.replace('/home');
+          router.replace('/(tabs)');
         }
 
         return { error: null };
