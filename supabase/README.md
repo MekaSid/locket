@@ -13,6 +13,15 @@ For a new project:
 7. `007_pair_photo_view_updates.sql`
 8. `008_connect4_sessions.sql`
 9. `009_connect4_reset_and_rematch.sql`
+10. `010_connect4_status_fix.sql`
+11. `011_connect4_game_over_winner_fix.sql`
+12. `012_connect4_last_winner_fix.sql`
+13. `013_fix_connect4_rematch_function.sql`
+14. `014_account_management_actions.sql`
+9. `009_connect4_reset_and_rematch.sql`
 10. `010_drop_connect4_reset_function.sql`
+11. `011_pair_photo_caption_position.sql`
+12. `012_pair_media_video_support.sql`
+13. `013_fix_connect4_rematch_function.sql`
 
 For existing projects, only run new numbered files you have not applied yet. The files are written to be safe to rerun, but the intended workflow is incremental migrations instead of repeatedly pasting one large SQL file.

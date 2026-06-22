@@ -91,3 +91,27 @@ export async function joinPairWithCode(code: string) {
     error: error?.message ?? null,
   };
 }
+
+export async function endCurrentPair() {
+  if (!supabase) {
+    return { error: 'Supabase is not configured yet.' };
+  }
+
+  const { error } = await supabase.rpc('end_current_pair');
+
+  return {
+    error: error?.message ?? null,
+  };
+}
+
+export async function deleteMyAccount() {
+  if (!supabase) {
+    return { error: 'Supabase is not configured yet.' };
+  }
+
+  const { error } = await supabase.rpc('delete_my_account');
+
+  return {
+    error: error?.message ?? null,
+  };
+}
