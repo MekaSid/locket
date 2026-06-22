@@ -7,6 +7,7 @@ import { supabase } from '../lib/supabase';
 
 type AuthResult = {
   error: string | null;
+  message?: string | null;
 };
 
 type AuthContextValue = {
@@ -14,7 +15,7 @@ type AuthContextValue = {
   session: Session | null;
   user: User | null;
   signIn: (email: string, password: string) => Promise<AuthResult>;
-  signUp: (email: string, password: string) => Promise<AuthResult>;
+  signUp: (email: string, password: string, firstName: string, lastName: string) => Promise<AuthResult>;
   signOut: () => Promise<void>;
 };
 
@@ -65,12 +66,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
         await ensureProfile(data.user);
 
-        router.replace('/(tabs)');
+        router.replace('/');
         return { error: null };
       },
-      signUp: async (email, password) => {
+      signUp: async (email, password, firstName, lastName) => {
         if (!supabase) {
           return { error: 'Supabase is not configured yet.' };
+        }
+
+        if (!firstName.trim() || !lastName.trim()) {
+          return { error: 'Enter your first and last name.' };
         }
 
         if (!email || !password) {
@@ -83,13 +88,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
           return { error: error.message };
         }
 
-        await ensureProfile(data.user);
+        await ensureProfile(data.user, { firstName, lastName });
 
         if (data.session) {
-          router.replace('/(tabs)');
+          router.replace('/');
+          return { error: null };
         }
 
-        return { error: null };
+        return { error: null, message: 'Account created. Sign in to continue.' };
       },
       signOut: async () => {
         if (supabase) {

@@ -1,7 +1,6 @@
--- Deprecated: use numbered files in supabase/sql instead.
--- For new setup, run:
--- 1. supabase/sql/001_profiles_and_pairing.sql
--- 2. supabase/sql/002_profile_avatar_storage.sql
+-- Baseline schema for profiles, account pairing, invite links, and pairing RPCs.
+-- This is the current baseline copied from the original root supabase.sql.
+-- New database changes should be added as separate numbered files in this directory.
 
 create extension if not exists pgcrypto with schema extensions;
 

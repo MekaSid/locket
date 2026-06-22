@@ -26,7 +26,7 @@ export function Screen({ children, scrollable = false }: ScreenProps) {
 
 const styles = StyleSheet.create({
   safeArea: {
-    backgroundColor: '#fbfaf7',
+    backgroundColor: '#ffffff',
     flex: 1,
   },
   content: {

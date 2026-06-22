@@ -21,7 +21,7 @@ export function AppText({ children, color = 'default', style, variant = 'body', 
 
 const styles = StyleSheet.create({
   base: {
-    color: '#151515',
+    color: '#000000',
     fontSize: 16,
     letterSpacing: 0,
   },
@@ -54,16 +54,16 @@ const styles = StyleSheet.create({
 
 const colors = StyleSheet.create({
   default: {
-    color: '#151515',
+    color: '#000000',
   },
   muted: {
-    color: '#6f6a62',
+    color: '#666666',
   },
   danger: {
-    color: '#b42318',
+    color: '#000000',
   },
   success: {
-    color: '#177245',
+    color: '#000000',
   },
   inverse: {
     color: '#ffffff',

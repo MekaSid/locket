@@ -12,6 +12,8 @@ export default function LoginScreen() {
   const { signIn, signUp } = useAuth();
   const [mode, setMode] = useState<'signIn' | 'signUp'>('signIn');
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -25,13 +27,15 @@ export default function LoginScreen() {
     setMessage(null);
     setSubmitting(true);
 
-    const authAction = mode === 'signIn' ? signIn : signUp;
-    const result = await authAction(email.trim(), password);
+    const result =
+      mode === 'signIn'
+        ? await signIn(email.trim(), password)
+        : await signUp(email.trim(), password, firstName.trim(), lastName.trim());
 
     if (result.error) {
       setError(result.error);
-    } else if (mode === 'signUp') {
-      setMessage('Account created. If email confirmation is enabled, check your inbox before signing in.');
+    } else if (result.message) {
+      setMessage(result.message);
     }
 
     setSubmitting(false);
@@ -62,6 +66,33 @@ export default function LoginScreen() {
         ) : null}
 
         <View style={styles.form}>
+          {mode === 'signUp' ? (
+            <View style={styles.nameRow}>
+              <View style={styles.nameField}>
+                <TextField
+                  autoCapitalize="words"
+                  autoComplete="given-name"
+                  label="First name"
+                  onChangeText={setFirstName}
+                  placeholder="Sid"
+                  textContentType="givenName"
+                  value={firstName}
+                />
+              </View>
+              <View style={styles.nameField}>
+                <TextField
+                  autoCapitalize="words"
+                  autoComplete="family-name"
+                  label="Last name"
+                  onChangeText={setLastName}
+                  placeholder="Meka"
+                  textContentType="familyName"
+                  value={lastName}
+                />
+              </View>
+            </View>
+          ) : null}
+
           <TextField
             autoCapitalize="none"
             autoComplete="email"
@@ -116,14 +147,21 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   notice: {
-    borderColor: '#f1d69a',
+    borderColor: '#d9d9d9',
     borderRadius: 8,
     borderWidth: 1,
-    backgroundColor: '#fff8e6',
+    backgroundColor: '#f7f7f7',
     padding: 14,
     gap: 6,
   },
   form: {
     gap: 16,
+  },
+  nameField: {
+    flex: 1,
+  },
+  nameRow: {
+    flexDirection: 'row',
+    gap: 12,
   },
 });

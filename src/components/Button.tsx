@@ -28,7 +28,7 @@ export function Button({ children, disabled, loading, onPress, variant = 'primar
       ]}
     >
       {loading ? (
-        <ActivityIndicator color={variant === 'primary' ? '#ffffff' : '#3a332b'} />
+        <ActivityIndicator color={variant === 'primary' ? '#ffffff' : '#000000'} />
       ) : (
         <AppText color={variant === 'primary' ? 'inverse' : 'default'} style={styles.label}>
           {children}
@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
   },
   primary: {
-    backgroundColor: '#151515',
+    backgroundColor: '#000000',
   },
   secondary: {
-    backgroundColor: '#ece8e1',
+    backgroundColor: '#f2f2f2',
   },
   ghost: {
     backgroundColor: 'transparent',

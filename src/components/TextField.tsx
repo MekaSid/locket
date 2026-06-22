@@ -12,7 +12,7 @@ export function TextField({ label, style, ...props }: TextFieldProps) {
       <AppText variant="caption">{label}</AppText>
       <TextInput
         {...props}
-        placeholderTextColor="#9a948b"
+        placeholderTextColor="#8a8a8a"
         style={[styles.input, style]}
       />
     </View>
@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#ffffff',
-    borderColor: '#d8d2c8',
+    borderColor: '#d9d9d9',
     borderRadius: 8,
     borderWidth: 1,
-    color: '#151515',
+    color: '#000000',
     fontSize: 16,
     minHeight: 52,
     paddingHorizontal: 14,

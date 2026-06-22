@@ -1,19 +1,32 @@
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import { useState } from 'react';
 
 import { AppText } from './AppText';
 
 type AvatarProps = {
+  imageUrl?: string | null;
   label: string;
+  size?: number;
 };
 
-export function Avatar({ label }: AvatarProps) {
+export function Avatar({ imageUrl, label, size = 48 }: AvatarProps) {
   const initial = label.trim().charAt(0).toUpperCase() || '?';
+  const [failedUrl, setFailedUrl] = useState<string | null>(null);
+  const shouldShowImage = Boolean(imageUrl && failedUrl !== imageUrl);
 
   return (
-    <View style={styles.avatar}>
-      <AppText color="inverse" variant="subtitle">
-        {initial}
-      </AppText>
+    <View style={[styles.avatar, { borderRadius: size / 2, height: size, width: size }]}>
+      {shouldShowImage ? (
+        <Image
+          onError={() => setFailedUrl(imageUrl ?? null)}
+          source={{ uri: imageUrl as string }}
+          style={styles.image}
+        />
+      ) : (
+        <AppText color="inverse" variant="subtitle">
+          {initial}
+        </AppText>
+      )}
     </View>
   );
 }
@@ -21,10 +34,12 @@ export function Avatar({ label }: AvatarProps) {
 const styles = StyleSheet.create({
   avatar: {
     alignItems: 'center',
-    backgroundColor: '#3a6ea5',
-    borderRadius: 24,
-    height: 48,
+    backgroundColor: '#000000',
     justifyContent: 'center',
-    width: 48,
+    overflow: 'hidden',
+  },
+  image: {
+    height: '100%',
+    width: '100%',
   },
 });

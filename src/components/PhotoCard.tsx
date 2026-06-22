@@ -1,20 +1,25 @@
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 import { AppText } from './AppText';
 
 type PhotoCardProps = {
   caption: string;
+  imageUrl?: string | null;
   label: string;
   timestamp: string;
 };
 
-export function PhotoCard({ caption, label, timestamp }: PhotoCardProps) {
+export function PhotoCard({ caption, imageUrl, label, timestamp }: PhotoCardProps) {
   return (
     <View style={styles.card}>
       <View style={styles.placeholder}>
-        <AppText color="muted" variant="caption">
-          {label}
-        </AppText>
+        {imageUrl ? (
+          <Image source={{ uri: imageUrl }} style={styles.image} />
+        ) : (
+          <AppText color="muted" variant="caption">
+            {label}
+          </AppText>
+        )}
       </View>
       <View style={styles.content}>
         <AppText>{caption}</AppText>
@@ -29,7 +34,7 @@ export function PhotoCard({ caption, label, timestamp }: PhotoCardProps) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#ffffff',
-    borderColor: '#e2ded7',
+    borderColor: '#d9d9d9',
     borderRadius: 8,
     borderWidth: 1,
     overflow: 'hidden',
@@ -37,11 +42,15 @@ const styles = StyleSheet.create({
   placeholder: {
     alignItems: 'center',
     aspectRatio: 4 / 3,
-    backgroundColor: '#ebe2d6',
+    backgroundColor: '#f2f2f2',
     justifyContent: 'center',
   },
   content: {
     gap: 6,
     padding: 14,
+  },
+  image: {
+    height: '100%',
+    width: '100%',
   },
 });
